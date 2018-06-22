@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-2634.444444444443" y="-294.4444444444443">rcas.model.RaceCar</node>
+    <node x="-1638.444444444443" y="-294.4444444444443">rcas.util.CorneringAnalyserUtil</node>
+    <node x="-2628.888888888887" y="748.2222222222224">rcas.model.MagicFormulaTireModel</node>
+    <node x="-2629.444444444443" y="638.3333333333335">rcas.model.TireModel</node>
+    <node x="-1903.9999999999984" y="745.0000000000002">rcas.controller.RCASMainViewController</node>
+    <node x="-1529.2222222222206" y="603.6666666666667">rcas.util.CorneringAnalyserUtil.MMMSinglePoint</node>
+    <node x="-1528.2222222222208" y="757.2222222222224">RCASMain</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="rcas.util.CorneringAnalyserUtil" target="rcas.util.CorneringAnalyserUtil.MMMSinglePoint">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="rcas.controller.RCASMainViewController" target="rcas.model.MagicFormulaTireModel">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="rcas.util.CorneringAnalyserUtil.MMMSinglePoint" target="rcas.util.CorneringAnalyserUtil">
+      <point x="0.0" y="-70.0" />
+      <point x="0.0" y="323.5" />
+    </edge>
+    <edge source="rcas.controller.RCASMainViewController" target="rcas.model.RaceCar">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="rcas.model.MagicFormulaTireModel" target="rcas.model.TireModel">
+      <point x="0.0" y="-225.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="rcas.model.RaceCar" target="rcas.model.TireModel">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="rcas.model.RaceCar" target="rcas.model.MagicFormulaTireModel">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="rcas.controller.RCASMainViewController" target="rcas.util.CorneringAnalyserUtil">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="-1886.888888888889" y="707.6666666666666" />
+  <SelectedNodes>
+    <node>RCASMain</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
