@@ -3,24 +3,37 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<GridPane fx:id="mainPane" alignment="CENTER" hgap="15.0"
-		  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-		  minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="15.0"
-		  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-		  fx:controller="rcas.controller.RCASMainViewController" stylesheets="@../../RCASStyle.css">
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane fx:id="mainPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../RCASStyle.css" vgap="15.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASMainViewController">
 	<padding>
-		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 	</padding>
-	<LineChart fx:id="mainChart" id="mainChart" title="%mainChartTitle"
-			   prefWidth="600" prefHeight="600" GridPane.columnIndex="0"
-			   GridPane.rowIndex="0" GridPane.columnSpan="2" animated="false"
-			   createSymbols="false" legendVisible="false">
+	<LineChart id="mainChart" fx:id="mainChart" animated="false" createSymbols="false" legendVisible="false" prefHeight="600" prefWidth="600" title="%mainChartTitle" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0">
 		<xAxis>
-			<NumberAxis fx:id="xAxis" side="BOTTOM" label="%xAxisLabel"/>
+			<NumberAxis label="%xAxisLabel" side="BOTTOM" fx:id="xAxis" />
 		</xAxis>
 		<yAxis>
-			<NumberAxis fx:id="yAxis" side="LEFT" label="%yAxisLabel"/>
+			<NumberAxis fx:id="yAxis" label="%yAxisLabel" side="LEFT" />
 		</yAxis>
 	</LineChart>
+   <TableView prefHeight="370.0" prefWidth="154.0">
+     <columns>
+       <TableColumn prefWidth="75.0" text="Selected" />
+       <TableColumn prefWidth="75.0" text="Car" />
+         <TableColumn prefWidth="75.0" text="Color" />
+     </columns>
+   </TableView>
+   <columnConstraints>
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="267.0" />
+      <ColumnConstraints maxWidth="266.0" minWidth="0.0" prefWidth="97.0" />
+      <ColumnConstraints maxWidth="431.0" minWidth="174.0" prefWidth="176.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
