@@ -1,8 +1,5 @@
 package rcas.controller;
 
-import java.util.Iterator;
-import java.util.ResourceBundle;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -12,6 +9,8 @@ import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
 import rcas.model.TireModel;
 import rcas.util.CorneringAnalyserUtil;
+
+import java.util.ResourceBundle;
 
 public class RCASMainViewController {
 
@@ -63,8 +62,7 @@ public class RCASMainViewController {
 
 	private void setSeriesStyle(ObservableList<Series<Number, Number>> dataList_1, String styleSelector,
 			String lineStyle) {
-		for (Iterator<Series<Number, Number>> iterator = dataList_1.iterator(); iterator.hasNext();) {
-			Series<Number, Number> curve = (Series<Number, Number>) iterator.next();
+		for (Series<Number, Number> curve : dataList_1) {
 			curve.getNode().lookup(styleSelector).setStyle(lineStyle);
 		}
 	}
