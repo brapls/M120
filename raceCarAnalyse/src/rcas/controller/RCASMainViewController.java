@@ -1,12 +1,22 @@
 package rcas.controller;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
+import rcas.model.RaceCarSelectionItem;
 import rcas.model.TireModel;
 import rcas.util.CorneringAnalyserUtil;
 
@@ -15,6 +25,12 @@ import java.util.ResourceBundle;
 public class RCASMainViewController {
 
 	@FXML
+	public TableView carsTableView;
+
+	ObservableList<RaceCarSelectionItem> tableViewData;
+
+
+    @FXML
 	private GridPane mainPane;
 	@FXML
 	private LineChart<Number, Number> mainChart;
@@ -23,6 +39,21 @@ public class RCASMainViewController {
 
 	@FXML
 	public void initialize() {
+
+		TableColumn colSelection = new TableColumn("Selection");
+		TableColumn colCarName = new TableColumn("Car Name");
+		TableColumn colColour = new TableColumn("Colour");
+		carsTableView.getColumns().addAll(colSelection, colCarName, colColour);
+		tableViewData = FXCollections.observableArrayList(
+				new RaceCarSelectionItem(new RaceCar("RaceCar1")),
+				new RaceCarSelectionItem(new RaceCar("RaceCar2")),
+				new RaceCarSelectionItem(new RaceCar("RaceCar3"))
+		);
+		colSelection.setCellValueFactory(new PropertyValueFactory<RaceCarSelectionItem, CheckBox>("isSelectedCheckBox"));
+		carsTableView.setItems(tableViewData);
+
+
+
 		// create race cars and calculate a chart.
 		RaceCar myRaceCar_1 = new RaceCar(420, 420, 370, 370);
 		TireModel myTireModel_1 = new MagicFormulaTireModel();

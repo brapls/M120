@@ -85,7 +85,9 @@ public class RaceCar {
 		this.frontAxleTireModel = new MagicFormulaTireModel();
 		this.rearAxleTireModel = new MagicFormulaTireModel();
 	}
-
+	public RaceCar(String raceCarName){
+		this.name = new SimpleStringProperty(raceCarName);
+	}
 	/**
 	 * @return the name
 	 */

@@ -13,7 +13,7 @@
 	<padding>
 		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 	</padding>
-	<LineChart id="mainChart" fx:id="mainChart" animated="false" createSymbols="false" legendVisible="false" prefHeight="600" prefWidth="600" title="%mainChartTitle" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0">
+	<LineChart id="mainChart" fx:id="mainChart" animated="false" createSymbols="false" legendVisible="false" prefHeight="600" prefWidth="600" title="%mainChartTitle" GridPane.columnIndex="1" GridPane.columnSpan="2">
 		<xAxis>
 			<NumberAxis label="%xAxisLabel" side="BOTTOM" fx:id="xAxis" />
 		</xAxis>
@@ -21,16 +21,12 @@
 			<NumberAxis fx:id="yAxis" label="%yAxisLabel" side="LEFT" />
 		</yAxis>
 	</LineChart>
-   <TableView prefHeight="370.0" prefWidth="154.0">
-     <columns>
-       <TableColumn prefWidth="75.0" text="C1" />
-       <TableColumn prefWidth="75.0" text="C2" />
-     </columns>
+   <TableView prefHeight="370.0" prefWidth="154.0" fx:id="carsTableView"> <!--will be used in RCASMAIN.java-->
    </TableView>
    <columnConstraints>
       <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="267.0" />
-      <ColumnConstraints maxWidth="266.0" minWidth="0.0" prefWidth="0.0" />
-      <ColumnConstraints maxWidth="431.0" minWidth="174.0" prefWidth="273.0" />
+      <ColumnConstraints maxWidth="266.0" minWidth="0.0" prefWidth="97.0" />
+      <ColumnConstraints maxWidth="431.0" minWidth="174.0" prefWidth="176.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
