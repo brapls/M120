@@ -13,22 +13,21 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../RCASStyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASCarEdit">
+<GridPane prefHeight="400.0" prefWidth="725.0" stylesheets="@../../RCASStyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASCarEdit">
 
     <rowConstraints>
         <RowConstraints percentHeight="50" vgrow="NEVER" />
         <RowConstraints percentHeight="50" vgrow="NEVER" />
     </rowConstraints>
     <columnConstraints>
-        <ColumnConstraints prefWidth="600" />
+        <ColumnConstraints prefWidth="725" />
     </columnConstraints>
 
     <GridPane alignment="TOP_CENTER" GridPane.rowIndex="0">
         <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </padding>
-
-        <ImageView fitHeight="180" preserveRatio="true">
+        <ImageView fitHeight="225" preserveRatio="true">
             <Image url="@../resources/Pic1.jpeg" />
         </ImageView>
       <columnConstraints>
@@ -44,34 +43,146 @@
             <Insets bottom="10" left="10" right="10" top="10" />
         </padding>
 
+        <FlowPane prefWrapLength="200.0">
+            <GridPane styleClass="editThingsBox">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="10" />
+                </padding>
+                <rowConstraints>
+                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                </rowConstraints>
+
+                <GridPane alignment="TOP_RIGHT" GridPane.rowIndex="0">
+                    <columnConstraints>
+                        <ColumnConstraints maxWidth="30" minWidth="30" />
+                        <ColumnConstraints halignment="LEFT" maxWidth="155" minWidth="155" />
+                    </columnConstraints>
+
+                    <Pane GridPane.columnIndex="0">
+                        <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
+                    </Pane>
+
+                    <Label GridPane.columnIndex="1">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                        Name
+                    </Label>
+                    <rowConstraints>
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
+                <GridPane GridPane.rowIndex="1">
+                    <rowConstraints>
+                        <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                    </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" maxWidth="80" minWidth="75" />
+                        <ColumnConstraints maxWidth="5" minWidth="5" />
+                        <ColumnConstraints maxWidth="100" minWidth="100" />
+                    </columnConstraints>
+
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        Name:
+                    </Label>
+                    <TextField GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                </GridPane>
+                <columnConstraints>
+                    <ColumnConstraints />
+                </columnConstraints>
+                <FlowPane.margin>
+                    <Insets bottom="5" left="5" right="5" top="5" />
+                </FlowPane.margin>
+            </GridPane>
+
+            <GridPane styleClass="editThingsBox">
+                <padding>
+                    <Insets bottom="20" left="20" right="20" top="10" />
+                </padding>
+                <rowConstraints>
+                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                    <RowConstraints maxHeight="60" minHeight="60" vgrow="NEVER" />
+                </rowConstraints>
+
+                <GridPane alignment="TOP_RIGHT" GridPane.rowIndex="0">
+                    <columnConstraints>
+                        <ColumnConstraints maxWidth="30" minWidth="30" />
+                        <ColumnConstraints halignment="LEFT" maxWidth="155" minWidth="155" />
+                    </columnConstraints>
+
+                    <Pane GridPane.columnIndex="0">
+                        <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
+                    </Pane>
+
+                    <Label GridPane.columnIndex="1">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                        Tires *
+                    </Label>
+                    <rowConstraints>
+                        <RowConstraints />
+                    </rowConstraints>
+                </GridPane>
+                <GridPane GridPane.rowIndex="1">
+                    <rowConstraints>
+                        <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                        <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                    </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" maxWidth="80" minWidth="75" />
+                        <ColumnConstraints maxWidth="5" minWidth="5" />
+                        <ColumnConstraints maxWidth="100" minWidth="100" />
+                    </columnConstraints>
+
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        Front Tires:
+                    </Label>
+                    <TextField GridPane.columnIndex="2" GridPane.rowIndex="0" />
+
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        Rear Tires:
+                    </Label>
+                    <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                </GridPane>
+                <columnConstraints>
+                    <ColumnConstraints />
+                </columnConstraints>
+                <FlowPane.margin>
+                    <Insets bottom="5" left="5" right="5" top="5" />
+                </FlowPane.margin>
+            </GridPane>
+        </FlowPane>
+
         <GridPane styleClass="editThingsBox">
             <padding>
-                <Insets bottom="10" left="10" right="10" top="10" />
+                <Insets bottom="20" left="20" right="20" top="10" />
             </padding>
             <rowConstraints>
                 <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
-                <RowConstraints maxHeight="180" minHeight="180" vgrow="NEVER" />
+                <RowConstraints maxHeight="120" minHeight="120" vgrow="NEVER" />
             </rowConstraints>
 
             <GridPane alignment="TOP_RIGHT" GridPane.rowIndex="0">
                 <columnConstraints>
                     <ColumnConstraints maxWidth="30" minWidth="30" />
-                    <ColumnConstraints halignment="RIGHT" maxWidth="155" minWidth="155" />
+                    <ColumnConstraints halignment="LEFT" maxWidth="155" minWidth="155" />
                 </columnConstraints>
 
                 <Pane GridPane.columnIndex="0">
-                    <Button>O</Button>
+                    <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
                 </Pane>
 
                 <Label GridPane.columnIndex="1">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
-                    Corner Weight
+                    Corner Weight *
                 </Label>
-            <rowConstraints>
-               <RowConstraints />
-            </rowConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                </rowConstraints>
             </GridPane>
             <GridPane GridPane.rowIndex="1">
                 <rowConstraints>
@@ -106,9 +217,82 @@
                 </Label>
                 <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
             </GridPane>
-         <columnConstraints>
-            <ColumnConstraints />
-         </columnConstraints>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <FlowPane.margin>
+                <Insets bottom="5" left="5" right="5" top="5" />
+            </FlowPane.margin>
+        </GridPane>
+
+        <GridPane styleClass="editThingsBox">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="10" />
+            </padding>
+            <rowConstraints>
+                <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                <RowConstraints maxHeight="120" minHeight="120" vgrow="NEVER" />
+            </rowConstraints>
+
+            <GridPane alignment="TOP_RIGHT" GridPane.rowIndex="0">
+                <columnConstraints>
+                    <ColumnConstraints maxWidth="30" minWidth="30" />
+                    <ColumnConstraints halignment="RIGHT" maxWidth="155" minWidth="155" />
+                </columnConstraints>
+
+                <Pane GridPane.columnIndex="0">
+                    <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
+                </Pane>
+
+                <Label GridPane.columnIndex="1">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    Advanced
+                </Label>
+                <rowConstraints>
+                    <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+            <GridPane GridPane.rowIndex="1">
+                <rowConstraints>
+                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+                </rowConstraints>
+                <columnConstraints>
+                    <ColumnConstraints halignment="LEFT" maxWidth="80" minWidth="75" />
+                    <ColumnConstraints maxWidth="5" minWidth="5" />
+                    <ColumnConstraints maxWidth="100" minWidth="100" />
+                </columnConstraints>
+
+                <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    Track:
+                </Label>
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="0" />
+
+                <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    Weelbase:
+                </Label>
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
+                <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    COG Height:
+                </Label>
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
+
+                <Label GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    Front Roll Dist:
+                </Label>
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            </GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <FlowPane.margin>
+                <Insets bottom="5" left="5" right="5" top="5" />
+            </FlowPane.margin>
         </GridPane>
     </FlowPane>
 </GridPane>
