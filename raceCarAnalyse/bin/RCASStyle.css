@@ -2,3 +2,7 @@
   -fx-text-fill: blue;
   -fx-font-size: 1.6em;
 }
+
+.editThingsBox {
+    border: black 1px solid;
+}

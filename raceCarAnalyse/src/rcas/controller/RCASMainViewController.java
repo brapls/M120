@@ -1,18 +1,20 @@
 package rcas.controller;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart.Series;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
@@ -39,20 +41,67 @@ public class RCASMainViewController {
 
 	@FXML
 	public void initialize() {
+		carsTableView.setEditable(true); // Makes the table view Editable
 
 		TableColumn colSelection = new TableColumn("Selection");
 		TableColumn colCarName = new TableColumn("Car Name");
 		TableColumn colColour = new TableColumn("Colour");
+
 		carsTableView.getColumns().addAll(colSelection, colCarName, colColour);
 		tableViewData = FXCollections.observableArrayList(
-				new RaceCarSelectionItem(new RaceCar("RaceCar1")),
-				new RaceCarSelectionItem(new RaceCar("RaceCar2")),
-				new RaceCarSelectionItem(new RaceCar("RaceCar3"))
+				new RaceCarSelectionItem(new RaceCar("RaceCar1"), true),
+				new RaceCarSelectionItem(new RaceCar("RaceCar2"), false),
+				new RaceCarSelectionItem(new RaceCar("RaceCar3"), true)
 		);
-		colSelection.setCellValueFactory(new PropertyValueFactory<RaceCarSelectionItem, CheckBox>("isSelectedCheckBox"));
+
+		//START Selection-Checkboxcolumn
+		colSelection.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, Boolean>, ObservableValue<Boolean>>() {
+			@Override
+			public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<RaceCarSelectionItem, Boolean> param) {
+				RaceCarSelectionItem raceCarSelectionItem = param.getValue();
+				SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(raceCarSelectionItem.getIsSelected());
+				booleanProperty.addListener(new ChangeListener<Boolean>() {
+					@Override
+					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+						raceCarSelectionItem.setIsSelected(newValue);
+					}
+				});
+				return booleanProperty;
+			}
+		});
+		colSelection.setCellFactory(new Callback<TableColumn<RaceCarSelectionItem, Boolean>,
+			TableCell<RaceCarSelectionItem, Boolean>>() {
+				@Override
+				public TableCell<RaceCarSelectionItem, Boolean> call(TableColumn<RaceCarSelectionItem, Boolean> p) {
+					CheckBoxTableCell<RaceCarSelectionItem, Boolean> cell = new CheckBoxTableCell<RaceCarSelectionItem, Boolean>();
+					cell.setAlignment(Pos.CENTER);
+					return cell;
+				}
+		});
+		//END Selection-Checkboxcolumn
+		//START Carname-column
+		colCarName.setCellValueFactory(new PropertyValueFactory<>("raceCarName"));
+		//END Carname-column
+
+		//START Color-column
+		colColour.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, Color>, ObservableValue<Color>>() {
+			@Override
+			public ObservableValue<Color> call(TableColumn.CellDataFeatures<RaceCarSelectionItem, Color> param) {
+				RaceCarSelectionItem raceCarSelectionItem = param.getValue();
+				SimpleObjectProperty<Color> colorSimpleObjectProperty = new SimpleObjectProperty<>(raceCarSelectionItem.getGridColor());
+				colorSimpleObjectProperty.addListener(new ChangeListener<Color>() {
+					@Override
+					public void changed(ObservableValue<? extends Color> observable, Color oldValue, Color newValue) {
+						raceCarSelectionItem.setGridColor(newValue);
+					}
+				});
+				return colorSimpleObjectProperty;
+			}
+		});
+		//END Color-column
+
+
 		carsTableView.setItems(tableViewData);
-
-
 
 		// create race cars and calculate a chart.
 		RaceCar myRaceCar_1 = new RaceCar(420, 420, 370, 370);
