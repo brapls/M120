@@ -1,7 +1,10 @@
 package rcas.controller;
 
+import com.sun.javafx.collections.MappingChange;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,16 +15,22 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import javafx.util.converter.DefaultStringConverter;
 import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
 import rcas.model.RaceCarSelectionItem;
 import rcas.model.TireModel;
 import rcas.util.CorneringAnalyserUtil;
+import rcas.util.DataUtil;
 
+import java.beans.EventHandler;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class RCASMainViewController {
@@ -30,30 +39,33 @@ public class RCASMainViewController {
 	public TableView carsTableView;
 
 	ObservableList<RaceCarSelectionItem> tableViewData;
-
-
+	ObservableList<String> cbValues = FXCollections.observableArrayList("RED", "BROWN", "GREEN", "BLUE");
     @FXML
 	private GridPane mainPane;
 	@FXML
 	private LineChart<Number, Number> mainChart;
 	@FXML
 	private ResourceBundle resources;
+	@FXML
+	private Button btnAddNew;
+	@FXML
+	private Button btnChange;
+	@FXML
+	private Button btnDelete;
 
 	@FXML
 	public void initialize() {
+
 		carsTableView.setEditable(true); // Makes the table view Editable
 
 		TableColumn colSelection = new TableColumn("Selection");
 		TableColumn colCarName = new TableColumn("Car Name");
-		TableColumn colColour = new TableColumn("Colour");
 
-		carsTableView.getColumns().addAll(colSelection, colCarName, colColour);
-		tableViewData = FXCollections.observableArrayList(
-				new RaceCarSelectionItem(new RaceCar("RaceCar1"), true),
-				new RaceCarSelectionItem(new RaceCar("RaceCar2"), false),
-				new RaceCarSelectionItem(new RaceCar("RaceCar3"), true)
-		);
 
+		tableViewData = FXCollections.observableArrayList();
+		for(RaceCarSelectionItem rcsi : DataUtil.GetAllRaceCarSelectionItems()){
+			tableViewData.add(rcsi);
+		}
 		//START Selection-Checkboxcolumn
 		colSelection.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, Boolean>, ObservableValue<Boolean>>() {
 			@Override
@@ -64,6 +76,7 @@ public class RCASMainViewController {
 					@Override
 					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 						raceCarSelectionItem.setIsSelected(newValue);
+						setDiagramForAllSelectedCars();
 					}
 				});
 				return booleanProperty;
@@ -83,26 +96,33 @@ public class RCASMainViewController {
 		colCarName.setCellValueFactory(new PropertyValueFactory<>("raceCarName"));
 		//END Carname-column
 
-		//START Color-column
-		colColour.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, Color>, ObservableValue<Color>>() {
+		//START RCASColor-column0
+
+        TableColumn colColour = new TableColumn<>("Color");
+		colColour.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, String>, ObservableValue<String>>() {
 			@Override
-			public ObservableValue<Color> call(TableColumn.CellDataFeatures<RaceCarSelectionItem, Color> param) {
+			public ObservableValue<String> call(TableColumn.CellDataFeatures<RaceCarSelectionItem, String> param) {
 				RaceCarSelectionItem raceCarSelectionItem = param.getValue();
-				SimpleObjectProperty<Color> colorSimpleObjectProperty = new SimpleObjectProperty<>(raceCarSelectionItem.getGridColor());
-				colorSimpleObjectProperty.addListener(new ChangeListener<Color>() {
+				SimpleStringProperty stringProperty = new SimpleStringProperty(raceCarSelectionItem.getGridColor());
+				stringProperty.addListener(new ChangeListener<String>() {
 					@Override
-					public void changed(ObservableValue<? extends Color> observable, Color oldValue, Color newValue) {
+					public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 						raceCarSelectionItem.setGridColor(newValue);
+						setDiagramForAllSelectedCars();
 					}
 				});
-				return colorSimpleObjectProperty;
+				return stringProperty;
 			}
 		});
-		//END Color-column
+        //colColour.setCellValueFactory(new PropertyValueFactory<>("gridColor"));
+        colColour.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), cbValues));
+
+		//END RCASColor-column
 
 
+        carsTableView.getColumns().addAll(colSelection, colCarName, colColour);
 		carsTableView.setItems(tableViewData);
-
+/*
 		// create race cars and calculate a chart.
 		RaceCar myRaceCar_1 = new RaceCar(420, 420, 370, 370);
 		TireModel myTireModel_1 = new MagicFormulaTireModel();
@@ -137,9 +157,24 @@ public class RCASMainViewController {
 
 		ObservableList<Series<Number, Number>> dataList_2 = corneringUtil.generateMMMChartData(myRaceCar_2);
 		mainChart.getData().addAll(dataList_2);
-		this.setSeriesStyle(dataList_2, ".chart-series-line", "-fx-stroke: red; -fx-stroke-width: 1px;");
+		this.setSeriesStyle(dataList_2, ".chart-series-line", "-fx-stroke: red; -fx-stroke-width: 1px;");*/
+		setDiagramForAllSelectedCars();
+
+
 	}
 
+	private void setDiagramForAllSelectedCars(){
+		mainChart.getData().removeAll();
+		mainChart.getData().clear();
+		for(RaceCarSelectionItem rcsi : tableViewData){
+			if(rcsi.getIsSelected()){
+				CorneringAnalyserUtil corneringUtil = new CorneringAnalyserUtil();
+				ObservableList<Series<Number, Number>> dataList = corneringUtil.generateMMMChartData(rcsi.getRaceCar());
+				mainChart.getData().addAll(dataList);
+				this.setSeriesStyle(dataList, ".chart-series-line", "-fx-stroke: "+rcsi.getGridColor() +"; -fx-stroke-width: 1px;");
+			}
+		}
+	}
 	private void setSeriesStyle(ObservableList<Series<Number, Number>> dataList_1, String styleSelector,
 			String lineStyle) {
 		for (Series<Number, Number> curve : dataList_1) {

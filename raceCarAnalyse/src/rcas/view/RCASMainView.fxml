@@ -3,17 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="mainPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../RCASStyle.css" vgap="15.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASMainViewController">
+<GridPane fx:id="mainPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../RCASStyle.css" vgap="15.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASMainViewController">
 	<padding>
 		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 	</padding>
-	<LineChart id="mainChart" fx:id="mainChart" animated="false" createSymbols="false" legendVisible="false" prefHeight="600" prefWidth="600" title="%mainChartTitle" GridPane.columnIndex="1" GridPane.columnSpan="2">
+	<LineChart id="mainChart" fx:id="mainChart" animated="false" createSymbols="false" legendVisible="false" prefHeight="600" prefWidth="600" title="%mainChartTitle" GridPane.columnIndex="2" GridPane.columnSpan="2">
 		<xAxis>
 			<NumberAxis label="%xAxisLabel" side="BOTTOM" fx:id="xAxis" />
 		</xAxis>
@@ -21,10 +21,26 @@
 			<NumberAxis fx:id="yAxis" label="%yAxisLabel" side="LEFT" />
 		</yAxis>
 	</LineChart>
-   <TableView prefHeight="370.0" prefWidth="154.0" fx:id="carsTableView"> <!--will be used in RCASMAIN.java-->
+   <TableView fx:id="carsTableView" prefHeight="370.0" prefWidth="370.0"> <!--will be used in RCASMAIN.java-->
    </TableView>
+   <GridPane prefHeight="373.0" prefWidth="50.0" GridPane.columnIndex="1">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+     </rowConstraints>
+      <children>
+         <Button mnemonicParsing="false" text="Add new" fx:id="btnAddNew"/>
+         <Button mnemonicParsing="false" text="Change" GridPane.rowIndex="1" fx:id="btnChange"/>
+         <Button mnemonicParsing="false" text="Delete" GridPane.rowIndex="2" fx:id="btnDelete"/>
+      </children>
+   </GridPane>
    <columnConstraints>
-      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="267.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="250.0" />
+      <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints maxWidth="266.0" minWidth="0.0" prefWidth="97.0" />
       <ColumnConstraints maxWidth="431.0" minWidth="174.0" prefWidth="176.0" />
    </columnConstraints>
