@@ -1,36 +1,34 @@
 package rcas.controller;
 
-import com.sun.javafx.collections.MappingChange;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart.Series;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.DefaultStringConverter;
-import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
 import rcas.model.RaceCarSelectionItem;
-import rcas.model.TireModel;
 import rcas.util.CorneringAnalyserUtil;
 import rcas.util.DataUtil;
 
-import java.beans.EventHandler;
-import java.util.ArrayList;
-import java.util.Map;
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class RCASMainViewController {
@@ -38,8 +36,8 @@ public class RCASMainViewController {
 	@FXML
 	public TableView carsTableView;
 
-	ObservableList<RaceCarSelectionItem> tableViewData;
-	ObservableList<String> cbValues = FXCollections.observableArrayList("RED", "BROWN", "GREEN", "BLUE");
+	private ObservableList<RaceCarSelectionItem> tableViewData;
+	private ObservableList<String> cbValues = FXCollections.observableArrayList("RED", "BROWN", "GREEN", "BLUE");
     @FXML
 	private GridPane mainPane;
 	@FXML
@@ -63,33 +61,21 @@ public class RCASMainViewController {
 
 
 		tableViewData = FXCollections.observableArrayList();
-		for(RaceCarSelectionItem rcsi : DataUtil.GetAllRaceCarSelectionItems()){
-			tableViewData.add(rcsi);
-		}
+		tableViewData.addAll(DataUtil.GetAllRaceCarSelectionItems());
 		//START Selection-Checkboxcolumn
-		colSelection.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, Boolean>, ObservableValue<Boolean>>() {
-			@Override
-			public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<RaceCarSelectionItem, Boolean> param) {
-				RaceCarSelectionItem raceCarSelectionItem = param.getValue();
-				SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(raceCarSelectionItem.getIsSelected());
-				booleanProperty.addListener(new ChangeListener<Boolean>() {
-					@Override
-					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-						raceCarSelectionItem.setIsSelected(newValue);
-						setDiagramForAllSelectedCars();
-					}
-				});
-				return booleanProperty;
-			}
+		colSelection.setCellValueFactory((Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, Boolean>, ObservableValue<Boolean>>) param -> {
+			RaceCarSelectionItem raceCarSelectionItem = param.getValue();
+			SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(raceCarSelectionItem.getIsSelected());
+			booleanProperty.addListener((observable, oldValue, newValue) -> {
+				raceCarSelectionItem.setIsSelected(newValue);
+				setDiagramForAllSelectedCars();
+			});
+			return booleanProperty;
 		});
-		colSelection.setCellFactory(new Callback<TableColumn<RaceCarSelectionItem, Boolean>,
-			TableCell<RaceCarSelectionItem, Boolean>>() {
-				@Override
-				public TableCell<RaceCarSelectionItem, Boolean> call(TableColumn<RaceCarSelectionItem, Boolean> p) {
-					CheckBoxTableCell<RaceCarSelectionItem, Boolean> cell = new CheckBoxTableCell<RaceCarSelectionItem, Boolean>();
-					cell.setAlignment(Pos.CENTER);
-					return cell;
-				}
+		colSelection.setCellFactory((Callback<TableColumn<RaceCarSelectionItem, Boolean>, TableCell<RaceCarSelectionItem, Boolean>>) p -> {
+			CheckBoxTableCell<RaceCarSelectionItem, Boolean> cell = new CheckBoxTableCell<>();
+			cell.setAlignment(Pos.CENTER);
+			return cell;
 		});
 		//END Selection-Checkboxcolumn
 		//START Carname-column
@@ -99,20 +85,14 @@ public class RCASMainViewController {
 		//START RCASColor-column0
 
         TableColumn colColour = new TableColumn<>("Color");
-		colColour.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(TableColumn.CellDataFeatures<RaceCarSelectionItem, String> param) {
-				RaceCarSelectionItem raceCarSelectionItem = param.getValue();
-				SimpleStringProperty stringProperty = new SimpleStringProperty(raceCarSelectionItem.getGridColor());
-				stringProperty.addListener(new ChangeListener<String>() {
-					@Override
-					public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-						raceCarSelectionItem.setGridColor(newValue);
-						setDiagramForAllSelectedCars();
-					}
-				});
-				return stringProperty;
-			}
+		colColour.setCellValueFactory((Callback<TableColumn.CellDataFeatures<RaceCarSelectionItem, String>, ObservableValue<String>>) param -> {
+			RaceCarSelectionItem raceCarSelectionItem = param.getValue();
+			SimpleStringProperty stringProperty = new SimpleStringProperty(raceCarSelectionItem.getGridColor());
+			stringProperty.addListener((observable, oldValue, newValue) -> {
+				raceCarSelectionItem.setGridColor(newValue);
+				setDiagramForAllSelectedCars();
+			});
+			return stringProperty;
 		});
         //colColour.setCellValueFactory(new PropertyValueFactory<>("gridColor"));
         colColour.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), cbValues));
@@ -160,7 +140,13 @@ public class RCASMainViewController {
 		this.setSeriesStyle(dataList_2, ".chart-series-line", "-fx-stroke: red; -fx-stroke-width: 1px;");*/
 		setDiagramForAllSelectedCars();
 
-
+		btnAddNew.setOnAction(e -> openCarEdit(new RaceCar("New Car")));
+		btnChange.setOnAction(e -> {
+			RaceCarSelectionItem rcsi = (RaceCarSelectionItem)carsTableView.getSelectionModel().getSelectedItem();
+			RaceCar rc = rcsi.getRaceCar();
+			openCarEdit(rc);
+		});
+		btnDelete.setOnAction(event -> tableViewData.remove(carsTableView.getSelectionModel().getSelectedItem()));
 	}
 
 	private void setDiagramForAllSelectedCars(){
@@ -179,6 +165,32 @@ public class RCASMainViewController {
 			String lineStyle) {
 		for (Series<Number, Number> curve : dataList_1) {
 			curve.getNode().lookup(styleSelector).setStyle(lineStyle);
+		}
+	}
+
+	private void openCarEdit(RaceCar car) {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rcas/view/RCASCarEdit.fxml"));
+		GridPane root;
+		try {
+			root = fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setTitle("Car Details");
+			stage.setScene(new Scene(root, 725, 530));
+
+			RCASCarEdit controller = fxmlLoader.getController();
+			controller.SetCarForEdit(car);
+
+			Scene scene;
+			if (root.getScene() == null) {
+				scene = new Scene(root);
+				stage.setScene(scene);
+			} else {
+				stage.setScene(root.getScene());
+			}
+			stage.show();
+		}
+		catch (IOException error) {
+			error.printStackTrace();
 		}
 	}
 

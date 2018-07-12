@@ -16,13 +16,14 @@ public interface TireModel {
 	 * <br>
 	 * 
 	 * @param slipAngle
-	 *            - slip angle of the tire in degrees (°).
+	 *            - slip angle of the tire in degrees (ï¿½).
 	 * @param load
 	 *            - load on the tire in N.
 	 * @return - lateral tire force in N.
 	 */
 	public Double getLateralTireForce(Double slipAngle, Double load);
 
+	public String tireName();
 	/*
 	 * TODO: In future a method with the declaration
 	 * "getLongitudinalTireForce(Double slip, Double load)" for longitudinal
