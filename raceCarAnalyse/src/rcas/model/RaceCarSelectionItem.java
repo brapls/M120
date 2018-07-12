@@ -1,8 +1,6 @@
 package rcas.model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import javafx.beans.property.BooleanProperty;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -10,30 +8,39 @@ import javafx.scene.paint.Color;
  */
 //Is used for the table of the RaceCar in the MainView
 public class RaceCarSelectionItem {
-    private CheckBox isSelectedCheckBox = new CheckBox();
+    private Boolean isSelected = false;
     private RaceCar raceCar = null;
-    private Color gridColor = Color.BLACK;
+    private String gridColor = "GREEN";
+    private String raceCarName;
+    public ComboBox<Color> colorComboBox;
 
     public RaceCarSelectionItem(RaceCar raceCar){
         this.raceCar = raceCar;
-        this.isSelectedCheckBox = new CheckBox();
+        this.raceCarName = raceCar.getName();
+        this.isSelected = false;
     }
-    public boolean GetIsSelected(){
-        return this.isSelectedCheckBox.isSelected();
+    public RaceCarSelectionItem(RaceCar raceCar, boolean isSelected, String gridColor){
+        this.raceCar = raceCar;
+        this.raceCarName = raceCar.getName();
+        this.isSelected = isSelected;
+        this.gridColor = gridColor;
     }
-    public RaceCar GetRaceCar(){
+    public boolean getIsSelected(){
+        return this.isSelected;
+    }
+    public RaceCar getRaceCar(){
         return this.raceCar;
     }
-    public String GetRaceCarName(){
+    public String getRaceCarName(){
         return this.raceCar.getName();
     }
-    public Color GetGridColor(){
+    public String getGridColor(){
         return this.gridColor;
     }
-    public void SetGridColor(Color color){
+    public void setGridColor(String color){
         this.gridColor = color;
     }
-    public void SetIsSelected(Boolean isSelected){
-        this.isSelectedCheckBox.selectedProperty().set(isSelected);
+    public void setIsSelected(Boolean isSelected){
+        this.isSelected = isSelected;
     }
 }

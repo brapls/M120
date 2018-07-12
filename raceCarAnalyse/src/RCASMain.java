@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
@@ -10,11 +11,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
 import rcas.model.RaceCarSelectionItem;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import rcas.model.TireModel;
+import rcas.util.DataUtil;
 
 
 public class RCASMain extends Application {
@@ -22,7 +26,6 @@ public class RCASMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(RCASMain.class.getResource("rcas/view/RCASMainView.fxml"));
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("RCASResources");
@@ -33,7 +36,6 @@ public class RCASMain extends Application {
 		primaryStage.setTitle(resourceBundle.getString("applicationTitle"));
 		primaryStage.setScene(mainScene);
 		primaryStage.show();
-
 	}
 
 	public static void main(String[] args) {
