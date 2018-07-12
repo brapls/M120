@@ -16,8 +16,9 @@
 <GridPane prefHeight="400.0" prefWidth="725.0" stylesheets="@../../RCASStyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASCarEdit">
 
     <rowConstraints>
-        <RowConstraints percentHeight="50" vgrow="NEVER" />
-        <RowConstraints percentHeight="50" vgrow="NEVER" />
+        <RowConstraints minHeight="250" vgrow="NEVER" />
+        <RowConstraints minHeight="250" vgrow="NEVER" />
+        <RowConstraints maxHeight="30" minHeight="30" prefHeight="30" vgrow="NEVER" />
     </rowConstraints>
     <columnConstraints>
         <ColumnConstraints prefWidth="725" />
@@ -27,7 +28,7 @@
         <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </padding>
-        <ImageView fitHeight="225" preserveRatio="true">
+        <ImageView fitHeight="225" preserveRatio="true" styleClass="imageContainer">
             <Image url="@../resources/Pic1.jpeg" />
         </ImageView>
       <columnConstraints>
@@ -60,7 +61,7 @@
                     </columnConstraints>
 
                     <Pane GridPane.columnIndex="0">
-                        <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
+                        <Button maxHeight="15" maxWidth="15" minHeight="15" minWidth="15" styleClass="expandButton" textAlignment="CENTER">+</Button>
                     </Pane>
 
                     <Label GridPane.columnIndex="1">
@@ -73,7 +74,7 @@
                         <RowConstraints />
                     </rowConstraints>
                 </GridPane>
-                <GridPane GridPane.rowIndex="1">
+                <GridPane styleClass="editTexts" GridPane.rowIndex="1">
                     <rowConstraints>
                         <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                     </rowConstraints>
@@ -112,7 +113,7 @@
                     </columnConstraints>
 
                     <Pane GridPane.columnIndex="0">
-                        <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
+                        <Button maxHeight="15" maxWidth="15" minHeight="15" minWidth="15" styleClass="expandButton" textAlignment="CENTER">+</Button>
                     </Pane>
 
                     <Label GridPane.columnIndex="1">
@@ -125,7 +126,7 @@
                         <RowConstraints />
                     </rowConstraints>
                 </GridPane>
-                <GridPane GridPane.rowIndex="1">
+                <GridPane styleClass="editTexts" GridPane.rowIndex="1">
                     <rowConstraints>
                         <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                         <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
@@ -171,7 +172,7 @@
                 </columnConstraints>
 
                 <Pane GridPane.columnIndex="0">
-                    <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
+                    <Button maxHeight="15" maxWidth="15" minHeight="15" minWidth="15" styleClass="expandButton" textAlignment="CENTER">+</Button>
                 </Pane>
 
                 <Label GridPane.columnIndex="1">
@@ -184,7 +185,7 @@
                     <RowConstraints />
                 </rowConstraints>
             </GridPane>
-            <GridPane GridPane.rowIndex="1">
+            <GridPane styleClass="editTexts" GridPane.rowIndex="1">
                 <rowConstraints>
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
@@ -237,11 +238,11 @@
             <GridPane alignment="TOP_RIGHT" GridPane.rowIndex="0">
                 <columnConstraints>
                     <ColumnConstraints maxWidth="30" minWidth="30" />
-                    <ColumnConstraints halignment="RIGHT" maxWidth="155" minWidth="155" />
+                    <ColumnConstraints halignment="LEFT" maxWidth="155" minWidth="155" />
                 </columnConstraints>
 
                 <Pane GridPane.columnIndex="0">
-                    <Button textAlignment="CENTER" minWidth="15" maxWidth="15" maxHeight="15" minHeight="15" styleClass="expandButton">+</Button>
+                    <Button maxHeight="15" maxWidth="15" minHeight="15" minWidth="15" styleClass="expandButton" textAlignment="CENTER">+</Button>
                 </Pane>
 
                 <Label GridPane.columnIndex="1">
@@ -254,7 +255,7 @@
                     <RowConstraints />
                 </rowConstraints>
             </GridPane>
-            <GridPane GridPane.rowIndex="1">
+            <GridPane styleClass="editTexts" GridPane.rowIndex="1">
                 <rowConstraints>
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
@@ -262,7 +263,7 @@
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                 </rowConstraints>
                 <columnConstraints>
-                    <ColumnConstraints halignment="LEFT" maxWidth="80" minWidth="75" />
+                    <ColumnConstraints halignment="RIGHT" maxWidth="80" minWidth="75" />
                     <ColumnConstraints maxWidth="5" minWidth="5" />
                     <ColumnConstraints maxWidth="100" minWidth="100" />
                 </columnConstraints>
@@ -295,4 +296,33 @@
             </FlowPane.margin>
         </GridPane>
     </FlowPane>
+
+    <GridPane GridPane.rowIndex="2">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="10" />
+        </padding>
+        <rowConstraints>
+            <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
+        </rowConstraints>
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50" />
+            <ColumnConstraints halignment="RIGHT" percentWidth="50" />
+        </columnConstraints>
+        <Label GridPane.columnIndex="0">
+            * Required
+        </Label>
+        <GridPane alignment="TOP_RIGHT" GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="60"/>
+                <ColumnConstraints percentWidth="20" halignment="RIGHT"/>
+                <ColumnConstraints percentWidth="20" halignment="RIGHT"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+
+            <Button GridPane.columnIndex="1">Cancel</Button>
+            <Button GridPane.columnIndex="2">Save</Button>
+        </GridPane>
+    </GridPane>
 </GridPane>
