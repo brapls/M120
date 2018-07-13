@@ -179,6 +179,7 @@ public class RCASMainViewController {
 
 			RCASCarEdit controller = fxmlLoader.getController();
 			controller.SetCarForEdit(car);
+            controller.SetValuesIntoFields();
 
 			Scene scene;
 			if (root.getScene() == null) {

@@ -23,7 +23,10 @@ public interface TireModel {
 	 */
 	public Double getLateralTireForce(Double slipAngle, Double load);
 
-	public String tireName();
+	public String getName();
+
+	public void setName(String name);
+
 	/*
 	 * TODO: In future a method with the declaration
 	 * "getLongitudinalTireForce(Double slip, Double load)" for longitudinal

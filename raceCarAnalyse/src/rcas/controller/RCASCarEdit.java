@@ -7,12 +7,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
 import rcas.model.TireModel;
 import rcas.util.DataUtil;
-
-import java.util.ArrayList;
 
 public class RCASCarEdit {
 
@@ -20,7 +19,7 @@ public class RCASCarEdit {
     public TextField CarName;
 
     @FXML
-    public ChoiceBox TireFront;
+    public ComboBox<String> TireFront;
     @FXML
     public ComboBox<String> TireRear;
     @FXML
@@ -31,8 +30,6 @@ public class RCASCarEdit {
     public TextField CwRearLeft;
     @FXML
     public TextField CwRearRight;
-
-
     @FXML
     public TextField FrontTrack;
     @FXML
@@ -45,6 +42,8 @@ public class RCASCarEdit {
     public TextField FrontRollDist;
     @FXML
     public Button btnSave;
+    @FXML
+    public Button btnCancel;
 
 
 
@@ -53,14 +52,11 @@ public class RCASCarEdit {
     @FXML
     public void initialize() {
         btnSave.setOnAction(e -> save());
+        btnCancel.setOnAction(e -> ((Stage) btnCancel.getScene().getWindow()).close());
     }
 
     public void SetCarForEdit(RaceCar car) {
         raceCar = car;
-
-        CarName.setText(car.getName());
-        TireFront.setItems(getTireNameList());
-        TireFront.selectionModelProperty().set(car.getFrontAxleTireModel().tireName());
     }
 
     private ObservableList<String> getTireNameList() {
@@ -234,7 +230,7 @@ public class RCASCarEdit {
             return;
         }
 
-        ArrayList<RaceCar> rcs = DataUtil.GetAllRaceCars();
+        ObservableList<RaceCar> rcs = DataUtil.GetAllRaceCars();
         for (RaceCar rc: rcs) {
             if(rc == raceCar) {
                 rc.setName(CarName.getText());
