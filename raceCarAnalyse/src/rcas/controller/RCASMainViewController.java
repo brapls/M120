@@ -149,14 +149,14 @@ public class RCASMainViewController {
 			RaceCar rc = rcsi.getRaceCar();
 			openCarEdit(rc);
 		});
-		btnDelete.setOnAction(event -> tableViewData.remove(carsTableView.getSelectionModel().getSelectedItem()));
+		btnDelete.setOnAction(event -> btnRemove_Click());
 		btnUpdate.setOnAction(event -> carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems()));
 	}
 
 	private void setDiagramForAllSelectedCars(){
 		mainChart.getData().removeAll();
 		mainChart.getData().clear();
-		for(RaceCarSelectionItem rcsi : tableViewData){
+		for(RaceCarSelectionItem rcsi : (ObservableList<RaceCarSelectionItem>) carsTableView.getItems()){
 			if(rcsi.getIsSelected()){
 				CorneringAnalyserUtil corneringUtil = new CorneringAnalyserUtil();
 				ObservableList<Series<Number, Number>> dataList = corneringUtil.generateMMMChartData(rcsi.getRaceCar());
@@ -164,6 +164,11 @@ public class RCASMainViewController {
 				this.setSeriesStyle(dataList, ".chart-series-line", "-fx-stroke: "+rcsi.getGridColor() +"; -fx-stroke-width: 1px;");
 			}
 		}
+	}
+	private void btnRemove_Click(){
+		DataUtil.removeCarSelectionItem((RaceCarSelectionItem) carsTableView.getSelectionModel().getSelectedItem());
+		carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems());
+		setDiagramForAllSelectedCars();
 	}
 	private void setSeriesStyle(ObservableList<Series<Number, Number>> dataList_1, String styleSelector,
 			String lineStyle) {

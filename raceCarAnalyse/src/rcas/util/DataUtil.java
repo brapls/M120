@@ -61,4 +61,7 @@ public class DataUtil {
             Initialise();
         raceCarSelectionItems.add(raceCarSelectionItem);
     }
+    public static void removeCarSelectionItem(RaceCarSelectionItem raceCarSelectionItem){
+        raceCarSelectionItems.remove(raceCarSelectionItem);
+    }
 }
