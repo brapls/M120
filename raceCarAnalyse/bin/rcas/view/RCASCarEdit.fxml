@@ -322,7 +322,7 @@
             </rowConstraints>
 
             <Button GridPane.columnIndex="1">Cancel</Button>
-            <Button GridPane.columnIndex="2">Save</Button>
+            <Button fx:id="btnSave" GridPane.columnIndex="2">Save</Button>
         </GridPane>
     </GridPane>
 </GridPane>
