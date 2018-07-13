@@ -99,12 +99,12 @@ public class RCASCarEdit {
         TireFront.setItems(tires);
         TireModel fatm = raceCar.getFrontAxleTireModel();
         if (fatm != null)
-        TireFront.getSelectionModel().select(fatm.getName());
+        TireFront.getSelectionModel().select(getTireIndex(fatm.getName()));
 
         TireRear.setItems(tires);
         TireModel ratm = raceCar.getRearAxleTireModel();
         if (ratm != null)
-        TireRear.getSelectionModel().select(ratm.getName());
+        TireRear.getSelectionModel().select(getTireIndex(ratm.getName()));
 
         CwFrontLeft.setText(raceCar.cornerWeightFLProperty().getValue().toString());
         CwFrontRight.setText(raceCar.cornerWeightFRProperty().getValue().toString());
@@ -116,6 +116,10 @@ public class RCASCarEdit {
         Wheelbase.setText(raceCar.getWheelbase().toString());
         CogHeight.setText(raceCar.getCogHeight().toString());
         FrontRollDist.setText(raceCar.getFrontRollDist().toString());
+    }
+
+    private int getTireIndex(String name) {
+        return getTireNameList().indexOf(name);
     }
 
     private void save() {
