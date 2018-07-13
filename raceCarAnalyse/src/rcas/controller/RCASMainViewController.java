@@ -49,8 +49,8 @@ public class RCASMainViewController {
 	private Button btnChange;
 	@FXML
 	private Button btnDelete;
-
 	@FXML
+	private Button btnUpdate;
 	public void initialize() {
 
 		carsTableView.setEditable(true); // Makes the table view Editable
@@ -100,7 +100,8 @@ public class RCASMainViewController {
 
 
         carsTableView.getColumns().addAll(colSelection, colCarName, colColour);
-		carsTableView.setItems(tableViewData);
+        this.carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems());
+
 /*
 		// create race cars and calculate a chart.
 		RaceCar myRaceCar_1 = new RaceCar(420, 420, 370, 370);
@@ -149,6 +150,7 @@ public class RCASMainViewController {
 			openCarEdit(rc);
 		});
 		btnDelete.setOnAction(event -> tableViewData.remove(carsTableView.getSelectionModel().getSelectedItem()));
+		btnUpdate.setOnAction(event -> carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems()));
 	}
 
 	private void setDiagramForAllSelectedCars(){

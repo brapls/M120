@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="mainPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../RCASStyle.css" vgap="15.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASMainViewController">
+<GridPane fx:id="mainPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../RCASStyle.css" vgap="15.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASMainViewController">
 	<padding>
 		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 	</padding>
@@ -31,11 +31,13 @@
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
      </rowConstraints>
       <children>
-         <Button mnemonicParsing="false" text="Add new" fx:id="btnAddNew"/>
-         <Button mnemonicParsing="false" text="Change" GridPane.rowIndex="1" fx:id="btnChange"/>
-         <Button mnemonicParsing="false" text="Delete" GridPane.rowIndex="2" fx:id="btnDelete"/>
+         <Button fx:id="btnAddNew" mnemonicParsing="false" text="Add new" />
+         <Button fx:id="btnChange" mnemonicParsing="false" text="Change" GridPane.rowIndex="1" />
+         <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete" GridPane.rowIndex="2" />
+         <Button mnemonicParsing="false" fx:id="btnUpdate" text="Update" GridPane.rowIndex="3" />
       </children>
    </GridPane>
    <columnConstraints>
