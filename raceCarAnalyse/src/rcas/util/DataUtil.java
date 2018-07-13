@@ -1,5 +1,7 @@
 package rcas.util;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import rcas.model.MagicFormulaTireModel;
 import rcas.model.RaceCar;
 import rcas.model.RaceCarSelectionItem;
@@ -11,10 +13,10 @@ import java.util.ArrayList;
 public class DataUtil {
 
     private static Boolean isInitialised = false;
-    private static ArrayList<RaceCar> raceCars = new ArrayList<RaceCar>();
-    private static ArrayList<RaceCarSelectionItem> raceCarSelectionItems = new ArrayList<RaceCarSelectionItem>();
+    private static ObservableList<RaceCar> raceCars = FXCollections.observableArrayList();
+    private static ObservableList<RaceCarSelectionItem> raceCarSelectionItems =FXCollections.observableArrayList();
     private static void Initialise(){
-        raceCars = new ArrayList<RaceCar>();
+        raceCars = FXCollections.observableArrayList();
 
         RaceCar myRaceCar_1 = new RaceCar(420, 420, 370, 370);
         TireModel myTireModel_1 = new MagicFormulaTireModel();
@@ -33,13 +35,13 @@ public class DataUtil {
         myRaceCar_2.setName("Car MOD (red)");
         raceCars.add(myRaceCar_2);
 
-        raceCarSelectionItems = new ArrayList<RaceCarSelectionItem>();
+        raceCarSelectionItems = FXCollections.observableArrayList();
         raceCarSelectionItems.add(new RaceCarSelectionItem(myRaceCar_1,true , "BLUE"));
         raceCarSelectionItems.add(new RaceCarSelectionItem(myRaceCar_2, true, "RED"));
         isInitialised = true;
     }
 
-    public static ArrayList<RaceCar> GetAllRaceCars(){
+    public static ObservableList<RaceCar> GetAllRaceCars(){
         if(!isInitialised)
             Initialise();
         return raceCars;
@@ -49,7 +51,7 @@ public class DataUtil {
             Initialise();
         raceCars.add(raceCar);
     }
-    public static ArrayList<RaceCarSelectionItem> GetAllRaceCarSelectionItems(){
+    public static ObservableList<RaceCarSelectionItem> GetAllRaceCarSelectionItems(){
         if(!isInitialised)
             Initialise();
         return raceCarSelectionItems;
