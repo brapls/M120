@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart.Series;
@@ -37,7 +36,7 @@ public class RCASMainViewController {
 	public TableView carsTableView;
 
 	private ObservableList<RaceCarSelectionItem> tableViewData;
-	private ObservableList<String> cbValues = FXCollections.observableArrayList("RED", "BROWN", "GREEN", "BLUE");
+    private ObservableList<String> cbValues = FXCollections.observableArrayList("ALICEBLUE","AQUA","BLACK","BLUE","BLUEVIOLET","BROWN","CADETBLUE","CHARTREUSE","CHOCOLATE","CORAL","CYAN","DARKGREEN","FUCHSIA","GREEN", "RED", "YELLOW");
     @FXML
 	private GridPane mainPane;
 	@FXML
@@ -140,7 +139,10 @@ public class RCASMainViewController {
 		this.setSeriesStyle(dataList_2, ".chart-series-line", "-fx-stroke: red; -fx-stroke-width: 1px;");*/
 		setDiagramForAllSelectedCars();
 
-		btnAddNew.setOnAction(e -> openCarEdit(new RaceCar("New Car")));
+		btnAddNew.setOnAction(e -> {
+		    RaceCar rc = new RaceCar(420, 420, 370, 370);
+		    openCarEdit(rc);
+        });
 		btnChange.setOnAction(e -> {
 			RaceCarSelectionItem rcsi = (RaceCarSelectionItem)carsTableView.getSelectionModel().getSelectedItem();
 			RaceCar rc = rcsi.getRaceCar();

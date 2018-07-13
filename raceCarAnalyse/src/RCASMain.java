@@ -31,7 +31,7 @@ public class RCASMain extends Application {
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("RCASResources");
 		fxmlLoader.setResources(resourceBundle);
 		GridPane mainPane = fxmlLoader.load();
-		Scene mainScene = new Scene(mainPane, 800, 600);
+		Scene mainScene = new Scene(mainPane, 1000, 600);
 		primaryStage.centerOnScreen();
 		primaryStage.setTitle(resourceBundle.getString("applicationTitle"));
 		primaryStage.setScene(mainScene);
