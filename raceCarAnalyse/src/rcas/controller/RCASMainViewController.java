@@ -154,7 +154,7 @@ public class RCASMainViewController {
 			}
 		});
 		btnDelete.setOnAction(event -> btnRemove_Click());
-		btnUpdate.setOnAction(event -> carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems()));
+		btnUpdate.setOnAction(event -> {carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems()); setDiagramForAllSelectedCars();});
 	}
 
 	private void setDiagramForAllSelectedCars(){
