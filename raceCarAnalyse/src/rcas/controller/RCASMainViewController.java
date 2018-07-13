@@ -1,5 +1,6 @@
 package rcas.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -11,14 +12,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart.Series;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.DefaultStringConverter;
@@ -145,9 +144,14 @@ public class RCASMainViewController {
 		    openCarEdit(rc);
         });
 		btnChange.setOnAction(e -> {
-			RaceCarSelectionItem rcsi = (RaceCarSelectionItem)carsTableView.getSelectionModel().getSelectedItem();
-			RaceCar rc = rcsi.getRaceCar();
-			openCarEdit(rc);
+			if(!checkIfTableViewElementIsSelected()) {
+				return;
+			}
+			else {
+				RaceCarSelectionItem rcsi = (RaceCarSelectionItem) carsTableView.getSelectionModel().getSelectedItem();
+				RaceCar rc = rcsi.getRaceCar();
+				openCarEdit(rc);
+			}
 		});
 		btnDelete.setOnAction(event -> btnRemove_Click());
 		btnUpdate.setOnAction(event -> carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems()));
@@ -165,10 +169,14 @@ public class RCASMainViewController {
 			}
 		}
 	}
-	private void btnRemove_Click(){
-		DataUtil.removeCarSelectionItem((RaceCarSelectionItem) carsTableView.getSelectionModel().getSelectedItem());
-		carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems());
-		setDiagramForAllSelectedCars();
+	private void btnRemove_Click() {
+		if (!checkIfTableViewElementIsSelected()) {
+			return;
+		} else {
+			DataUtil.removeCarSelectionItem((RaceCarSelectionItem) carsTableView.getSelectionModel().getSelectedItem());
+			carsTableView.setItems(DataUtil.GetAllRaceCarSelectionItems());
+			setDiagramForAllSelectedCars();
+		}
 	}
 	private void setSeriesStyle(ObservableList<Series<Number, Number>> dataList_1, String styleSelector,
 			String lineStyle) {
@@ -203,7 +211,18 @@ public class RCASMainViewController {
 			error.printStackTrace();
 		}
 	}
-
+	private boolean checkIfTableViewElementIsSelected() {
+		Boolean isSelected = !carsTableView.getSelectionModel().isEmpty();
+		if(!isSelected){
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Info");
+			alert.setHeaderText(null);
+			alert.setContentText("You have to select a car first.");
+			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+			alert.showAndWait();
+		}
+		return isSelected;
+	}
 	private void printRaceCarCorneringValues(RaceCar raceCar, CorneringAnalyserUtil util) {
 		System.out.println(String.format(
 				"%s: Grip = %.2f G\tBalance = %.2f Nm\tControl(entry) = %.2f Nm/deg\t"
