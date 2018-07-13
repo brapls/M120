@@ -119,6 +119,8 @@ public class RCASCarEdit {
     }
 
     private int getTireIndex(String name) {
+        int index = getTireNameList().indexOf(name);
+        if (index == -1) return 0;
         return getTireNameList().indexOf(name);
     }
 
