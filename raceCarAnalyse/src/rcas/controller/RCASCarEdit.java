@@ -240,7 +240,26 @@ public class RCASCarEdit {
         }
 
         ObservableList<RaceCar> rcs = DataUtil.GetAllRaceCars();
-        rcs.remove(raceCar);
+
+        RaceCar delCar = null;
+        for (RaceCar car : rcs) {
+            String carName = CarName.getText();
+            if (car.getName().equals(carName)) {
+                delCar = car;
+            }
+        }
+
+        if(delCar != null) {
+            rcs.remove(delCar);
+            ObservableList<RaceCarSelectionItem> rcsiList = DataUtil.GetAllRaceCarSelectionItems();
+            RaceCarSelectionItem rdel = null;
+            for (RaceCarSelectionItem rcsi : rcsiList) {
+                if(rcsi.getRaceCarName().equals(delCar.getName())) {
+                    rdel = rcsi;
+                }
+            }
+            rcsiList.remove(rdel);
+        }
 
         raceCar.setName(CarName.getText());
 
