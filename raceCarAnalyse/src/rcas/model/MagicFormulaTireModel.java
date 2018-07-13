@@ -110,7 +110,7 @@ public class MagicFormulaTireModel implements TireModel {
 	 * <b>CAUTION:</b> this function returns a value in Newton N!
 	 * 
 	 * @param slipAngle
-	 *            - the slip angle in degrees (°).
+	 *            - the slip angle in degrees (ï¿½).
 	 * @param load
 	 *            - the load in N.
 	 * @return - lateral tire force in N.
@@ -119,10 +119,12 @@ public class MagicFormulaTireModel implements TireModel {
 		return this.calcSlipAngleFactor(slipAngle) * this.calcLoadForce(load);
 	}
 
+	@Override
 	public String getName() {
 		return this.name.get();
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name.set(name);
 	}
