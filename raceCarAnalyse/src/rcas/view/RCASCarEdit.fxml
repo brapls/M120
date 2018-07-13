@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <GridPane prefHeight="400.0" prefWidth="725.0" stylesheets="@../../RCASStyle.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rcas.controller.RCASCarEdit">
 
     <rowConstraints>
@@ -141,12 +141,14 @@
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
                         Front Tires:
                     </Label>
-                    <ComboBox fx:id="TireFront" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <ChoiceBox GridPane.columnIndex="2" GridPane.rowIndex="0" >
+
+                    </ChoiceBox>
 
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
                         Rear Tires:
                     </Label>
-                    <ComboBox fx:id="TireRear" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                    <ChoiceBox GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 </GridPane>
                 <columnConstraints>
                     <ColumnConstraints />
@@ -202,22 +204,22 @@
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
                     Front Left:
                 </Label>
-                <TextField fx:id="CwFrontLeft" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="0" />
 
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
                     Front Right:
                 </Label>
-                <TextField fx:id="CwFrontRight" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
 
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
                     Rear Left:
                 </Label>
-                <TextField fx:id="CwRearLeft" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
 
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="3">
                     Rear Right:
                 </Label>
-                <TextField fx:id="CwRearRight" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
             </GridPane>
             <columnConstraints>
                 <ColumnConstraints />
@@ -262,7 +264,6 @@
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                     <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
-                    <RowConstraints maxHeight="30" minHeight="30" vgrow="NEVER" />
                 </rowConstraints>
                 <columnConstraints>
                     <ColumnConstraints halignment="RIGHT" maxWidth="80" minWidth="75" />
@@ -271,29 +272,24 @@
                 </columnConstraints>
 
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    Front Track:
+                    Track:
                 </Label>
-                <TextField fx:id="FrontTrack" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="0" />
 
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    Rear Track:
+                    Weelbase:
                 </Label>
-                <TextField fx:id="RearTrack" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
 
                 <Label GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    Wheelbase:
-                </Label>
-                <TextField fx:id="Wheelbase" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-
-                <Label GridPane.columnIndex="0" GridPane.rowIndex="3">
                     COG Height:
                 </Label>
-                <TextField fx:id="CogHeight" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
 
-                <Label GridPane.columnIndex="0" GridPane.rowIndex="4">
+                <Label GridPane.columnIndex="0" GridPane.rowIndex="3">
                     Front Roll Dist:
                 </Label>
-                <TextField fx:id="FrontRollDist" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
             </GridPane>
             <columnConstraints>
                 <ColumnConstraints />
@@ -329,7 +325,7 @@
             </rowConstraints>
 
             <Button GridPane.columnIndex="1">Cancel</Button>
-            <Button fx:id="btnSave" GridPane.columnIndex="2">Save</Button>
+            <Button GridPane.columnIndex="2">Save</Button>
         </GridPane>
     </GridPane>
 </GridPane>

@@ -170,8 +170,6 @@ public class RCASMainViewController {
 
 	private void openCarEdit(RaceCar car) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rcas/view/RCASCarEdit.fxml"));
-        ResourceBundle rb = ResourceBundle.getBundle("RCASResources");
-        fxmlLoader.setResources(rb);
 		GridPane root;
 		try {
 			root = fxmlLoader.load();
@@ -181,7 +179,6 @@ public class RCASMainViewController {
 
 			RCASCarEdit controller = fxmlLoader.getController();
 			controller.SetCarForEdit(car);
-			controller.SetValuesIntoFields();
 
 			Scene scene;
 			if (root.getScene() == null) {

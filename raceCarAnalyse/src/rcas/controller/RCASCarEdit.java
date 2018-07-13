@@ -3,51 +3,30 @@ package rcas.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import rcas.model.RaceCar;
-import rcas.model.TireModel;
 
 public class RCASCarEdit {
 
     @FXML
     public TextField CarName;
+
     @FXML
-    public ComboBox<String> TireFront;
+    public ChoiceBox TireFront;
     @FXML
-    public ComboBox<String> TireRear;
-    @FXML
-    public TextField CwFrontLeft;
-    @FXML
-    public TextField CwFrontRight;
-    @FXML
-    public TextField CwRearLeft;
-    @FXML
-    public TextField CwRearRight;
-    @FXML
-    public TextField FrontTrack;
-    @FXML
-    public TextField RearTrack;
-    @FXML
-    public TextField Wheelbase;
-    @FXML
-    public TextField CogHeight;
-    @FXML
-    public TextField FrontRollDist;
-    @FXML
-    public Button btnSave;
+    public ChoiceBox TireRear;
 
 
 
     private RaceCar raceCar;
 
-    @FXML
-    public void initialize() {
-    }
-
     public void SetCarForEdit(RaceCar car) {
         raceCar = car;
+
+        CarName.setText(car.getName());
+        TireFront.setItems(getTireNameList());
+        TireFront.selectionModelProperty().set(car.getFrontAxleTireModel().tireName());
     }
 
     private ObservableList<String> getTireNameList() {
@@ -75,37 +54,5 @@ public class RCASCarEdit {
         tireList.add("Yokohama");
 
         return tireList;
-    }
-
-    public void SetValuesIntoFields() {
-        String carName = raceCar.getName();
-        if (carName == null) carName = "";
-        CarName.setText(carName);
-
-        ObservableList<String> tires = getTireNameList();
-        TireFront.setItems(tires);
-        TireModel fatm = raceCar.getFrontAxleTireModel();
-        if (fatm != null)
-        TireFront.getSelectionModel().select(fatm.getName());
-
-        TireRear.setItems(tires);
-        TireModel ratm = raceCar.getRearAxleTireModel();
-        if (ratm != null)
-        TireRear.getSelectionModel().select(ratm.getName());
-
-        CwFrontLeft.setText(raceCar.cornerWeightFLProperty().getValue().toString());
-        CwFrontRight.setText(raceCar.cornerWeightFRProperty().getValue().toString());
-        CwRearLeft.setText(raceCar.cornerWeightRLProperty().getValue().toString());
-        CwRearRight.setText(raceCar.cornerWeightRRProperty().getValue().toString());
-
-        FrontTrack.setText(raceCar.getFrontTrack().toString());
-        RearTrack.setText(raceCar.getRearTrack().toString());
-        Wheelbase.setText(raceCar.getWheelbase().toString());
-        CogHeight.setText(raceCar.getCogHeight().toString());
-        FrontRollDist.setText(raceCar.getFrontRollDist().toString());
-    }
-
-    public save() {
-
     }
 }
